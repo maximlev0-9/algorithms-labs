@@ -1,4 +1,4 @@
-package lab1;
+package lab1.model;
 
 public class Insect {
     private String name;
@@ -11,16 +11,23 @@ public class Insect {
         this.weightInGrams = weightInGrams;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Insect{" +
+//                "name='" + name + '\'' +
+//                ", velocityInMeters=" + velocityInMeters +
+//                ", weightInGrams=" + weightInGrams +
+//                '}';
+//
+//   }
+
     @Override
     public String toString() {
-        return "Insect{" +
-                "name='" + name + '\'' +
-                ", velocityInMeters=" + velocityInMeters +
-                ", weightInGrams=" + weightInGrams +
-                '}';
+        return name + "," + velocityInMeters + "," + weightInGrams;
+
     }
 
-    public String getName() {
+        public String getName() {
         return name;
     }
 
