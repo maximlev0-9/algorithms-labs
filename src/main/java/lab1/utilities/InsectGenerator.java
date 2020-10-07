@@ -1,6 +1,9 @@
-package lab1;
+package lab1.utilities;
+
+import lab1.model.Insect;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class InsectGenerator {
 
@@ -24,5 +27,9 @@ public class InsectGenerator {
         }
         return insects;
 
+    }
+
+    public static void main(String[] args) {
+        Stream.of(createRandomInsects(6)).forEach(System.out::println);
     }
 }

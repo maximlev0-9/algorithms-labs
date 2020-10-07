@@ -1,9 +1,11 @@
-package lab1;
+package lab1.utilities;
+
+import lab1.model.Insect;
 
 public class Utils {
 
-    private static int swapCounterInsertion;
-    private static int compareCounterInsertion;
+    private static long swapCounterInsertion;
+    private static long compareCounterInsertion;
     private static long timeInMillisInsertion;
 
     private static int swapCounterQuick;
@@ -21,11 +23,11 @@ public class Utils {
         return timeInMillisQuick;
     }
 
-    public static int getCompareCounterInsertion() {
+    public static long getCompareCounterInsertion() {
         return compareCounterInsertion;
     }
 
-    public static int getSwapCounterInsertion() {
+    public static long getSwapCounterInsertion() {
         return swapCounterInsertion;
     }
 
@@ -39,7 +41,7 @@ public class Utils {
 
 
     public static void insertionSortInsectsByVelocityDesc(Insect[] insects) {
-        long startTime = System.nanoTime();
+        long startTime = System.currentTimeMillis();
         for (int i = 1; i < insects.length; i++) {
 
             int index = i;
@@ -55,7 +57,7 @@ public class Utils {
             }
         }
 
-        timeInMillisInsertion = startTime - System.nanoTime();
+        timeInMillisInsertion = System.currentTimeMillis() - startTime;
     }
 
     private static boolean compareVelocities(Insect[] insects, int index) {
@@ -111,9 +113,9 @@ public class Utils {
     }
 
     public static void quickSortInsectsByWeightDesc(Insect[] insects) {
-        long startTime = System.nanoTime();
+        long startTime = System.currentTimeMillis();
         quickSort(insects, 0, insects.length - 1);
-        timeInMillisQuick = startTime - System.nanoTime();
+        timeInMillisQuick = System.currentTimeMillis() - startTime;
     }
 
 }
