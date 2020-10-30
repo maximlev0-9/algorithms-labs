@@ -16,13 +16,6 @@ public class Launcher {
         String fileName = args[0];
         List<Insect> insectsList = new ArrayList<>();
 
-//        try {
-//            BufferedReader br = new BufferedReader(new FileReader(new File("src/main/java/lab1/example.csv")));
-//
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-
         String filePrefix = "D:/IdeaProjects/algorithms_and_programming/src/main/resources/";
         try (BufferedReader br = new BufferedReader(new FileReader(filePrefix + fileName))) {
             String line;

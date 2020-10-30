@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class InsectGenerator {
+    private static Random r = new Random();
 
     private InsectGenerator() {
     }
@@ -15,7 +16,6 @@ public class InsectGenerator {
     public static Insect[] createRandomInsects(int number) {
         Insect[] insects = new Insect[number];
 
-        Random r = new Random();
         String name;
         double velocity;
         int weight;
