@@ -57,7 +57,23 @@ public class Utils {
             }
         }
 
-        timeInMillisInsertion = System.currentTimeMillis() - startTime;
+
+
+
+            timeInMillisInsertion = System.currentTimeMillis() - startTime;
+    }
+    public static void selectionSortInsectsByVelocityDesc(Insect[] insects) {
+        for (int i = 0; i < insects.length; i++) {
+            int indexOfLeast = i;
+            for (int j = i; j < insects.length; j++) {
+                if (insects[j].getVelocityInMeters() < insects[indexOfLeast].getVelocityInMeters()){
+                    indexOfLeast = j;
+                }
+            }
+            Insect insect = insects[i];
+            insects[i] = insects[indexOfLeast];
+            insects[indexOfLeast] = insect;
+        }
     }
 
     private static boolean compareVelocities(Insect[] insects, int index) {
@@ -74,9 +90,7 @@ public class Utils {
             if (compareWeights(arr[j].getWeightInGrams(), pivot.getWeightInGrams())) {
                 i++;
 
-
                 swapCounterQuick++;
-
 
                 Insect temp = arr[i];
                 arr[i] = arr[j];
@@ -101,12 +115,8 @@ public class Utils {
 
     private static void quickSort(Insect[] arr, int low, int high) {
         if (low < high) {
-            /* pi is partitioning index, arr[pi] is
-              now at right place */
             int pi = partition(arr, low, high);
 
-            // Recursively sort elements before
-            // partition and after partition
             quickSort(arr, low, pi - 1);
             quickSort(arr, pi + 1, high);
         }
