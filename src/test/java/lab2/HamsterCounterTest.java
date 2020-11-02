@@ -1,6 +1,5 @@
 package lab2;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MainTest {
+class HamsterCounterTest {
 
     private Scanner scanner;
 
@@ -23,27 +22,25 @@ class MainTest {
         }
     }
 
-
     @Test
     void testWithExample1() {
-        String pathToFile = "src/main/java/lab2/hamstr.in";
-        Main m = new Main();
-        m.countMaxPossibleHamsters(pathToFile);
-        assertEquals("3", scanner.nextLine());
+        testMethod("src/main/java/lab2/hamstr.in", "3");
     }
+
     @Test
     void testWithExample2() {
-        String pathToFile = "src/main/java/lab2/hamstr2.in";
-        Main m = new Main();
-        m.countMaxPossibleHamsters(pathToFile);
-        assertEquals("2", scanner.nextLine());
+        testMethod("src/main/java/lab2/hamstr2.in", "2");
     }
+
     @Test
     void testWithExample3() {
-        String pathToFile = "src/main/java/lab2/hamstr3.in";
-        Main m = new Main();
-        m.countMaxPossibleHamsters(pathToFile);
-        assertEquals("1", scanner.nextLine());
+        testMethod("src/main/java/lab2/hamstr3.in", "1");
+    }
+
+    private void testMethod(String pathToFile, String expected) {
+        HamsterCounter hamsterCounter = new HamsterCounter();
+        hamsterCounter.countMaxPossibleHamsters(pathToFile);
+        assertEquals(expected, scanner.nextLine());
     }
 
 }
