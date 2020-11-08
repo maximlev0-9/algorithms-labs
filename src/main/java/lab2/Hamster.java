@@ -14,7 +14,8 @@ public class Hamster {
         this.greediness = greediness;
     }
 
-    public int getOverallAmountOfFood(int numberOfHamsters){
-        return dailyNorm + greediness * (numberOfHamsters-1);
+    public int getOverallAmountOfFood(int numberOfHamsters) {
+        return dailyNorm + greediness * (numberOfHamsters - 1);
     }
+
 }

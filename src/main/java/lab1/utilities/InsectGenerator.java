@@ -6,7 +6,8 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class InsectGenerator {
-    private static Random r = new Random();
+
+    private static final Random r = new Random();
 
     private InsectGenerator() {
     }
