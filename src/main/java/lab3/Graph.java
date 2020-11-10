@@ -3,8 +3,6 @@ package lab3;
 import java.util.*;
 
 public class Graph {
-    //    private Map<Vertex, List<Vertex>[]> vertices;
-//    private Map<Vertex, List<Vertex>[]> vertices2;
     private final Map<Vertex, List<Vertex>> verticesThatNeedThisToHaveAbilityToBeAdded;
     private final Map<Vertex, List<Vertex>> verticesNeededToAddThis;
 
@@ -61,7 +59,6 @@ public class Graph {
                 if (!visited.contains(v.getName())) {
                     getParentVertices(v.getName()).forEach(parentVertex -> {
                         if (!visited.contains(parentVertex.getName())) {
-                            // try to add parent vertex to queue
                             tryToAddParentVertexToQueue(queue, visited, parentVertex);
                         }
                     });
