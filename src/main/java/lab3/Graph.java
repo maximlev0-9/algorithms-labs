@@ -39,7 +39,7 @@ public class Graph {
         Vertex v1 = new Vertex(name1);
         Vertex v2 = new Vertex(name2);
         verticesThatNeedThisToHaveAbilityToBeAdded.get(v1).add(v2);
-        verticesThatNeedThisToHaveAbilityToBeAdded.get(v2).add(v1);
+        verticesNeededToAddThis.get(v2).add(v1);
     }
 
     public List<Vertex> getChildVertices(String label) {
@@ -50,7 +50,7 @@ public class Graph {
         return verticesNeededToAddThis.get(new Vertex(label));
     }
 
-    public Set<String> breadthFirstTraversal(String root) {
+    public Set<String> modifiedBreadthFirstTraversal(String root) {
         Set<String> visited = new LinkedHashSet<>();
         Queue<String> queue = new LinkedList<>();
         queue.add(root);
@@ -58,23 +58,30 @@ public class Graph {
         while (!queue.isEmpty()) {
             String vertex = queue.poll();
             for (Vertex v : getChildVertices(vertex)) {
-                if (!visited.contains(v.getName()))
-                    if (getParentVertices(vertex).stream().map(vertex1 -> {
-                        if (visited.contains(vertex1.getName())) {
-                            return true;
-                        } else {
+                if (!visited.contains(v.getName())) {
+                    getParentVertices(v.getName()).forEach(parentVertex -> {
+                        if (!visited.contains(parentVertex.getName())) {
                             // try to add parent vertex to queue
-                            return false;
+                            tryToAddParentVertexToQueue(queue, visited, parentVertex);
                         }
-                    }).reduce((aBoolean, aBoolean2) -> aBoolean && aBoolean2).orElse(false)) {
-
-                        visited.add(v.getName());
-                        queue.add(v.getName());
-                    }
+                    });
+                    visited.add(v.getName());
+                    queue.add(v.getName());
+                }
             }
         }
         return visited;
     }
 
+    private void tryToAddParentVertexToQueue(Queue<String> queue, Set<String> visited, Vertex vertex) {
+        getParentVertices(vertex.getName()).forEach(parentVertex -> {
+            if (!visited.contains(parentVertex.getName())) {
+                tryToAddParentVertexToQueue(queue, visited, parentVertex);
+            }
+
+        });
+        visited.add(vertex.getName());
+        queue.add(vertex.getName());
+    }
 }
 

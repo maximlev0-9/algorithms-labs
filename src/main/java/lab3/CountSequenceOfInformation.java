@@ -8,7 +8,7 @@ public class CountSequenceOfInformation {
         // map of elements and lists of elements that point on element
         Graph graph = reader.readFrom(pathToFile);
 
-        Set<String> strings = Graph.breadthFirstTraversal(graph, reader.getStartingVertex());
+        Set<String> strings = graph.modifiedBreadthFirstTraversal(reader.getStartingVertex());
 
         List<String> reversedList = new ArrayList<>();
         for (String s : strings) {
