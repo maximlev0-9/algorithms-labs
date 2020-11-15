@@ -5,31 +5,17 @@ import java.util.*;
 public class CountSequenceOfInformation {
     public void execute(String pathToFile) {
         MyReader reader = new MyReader();
-        // map of elements and lists of elements that point on element
-        Map<String, List<String>> elements = reader.readFrom(pathToFile);
 
-        Set<String> independentValues = getSetOfIndependentValues(elements);
+        Graph graph = reader.readFrom(pathToFile);
 
-        List<String> finalOutput = new ArrayList<>();
-        finalOutput.addAll(independentValues);
+        Set<String> strings = graph.modifiedBreadthFirstTraversal(reader.getStartingVertex());
 
-        for (int i = 0; i < elements.size(); i++) {
-            for (Map.Entry<String, List<String>> entry :
-                    elements.entrySet()) {
-                if (!independentValues.contains(entry.getKey()) && independentValues.containsAll(entry.getValue())) {
-                    independentValues.add(entry.getKey());
-                    finalOutput.add(entry.getKey());
-                }
-            }
+        List<String> reversedList = new ArrayList<>();
+        for (String s : strings) {
+            reversedList.add(0, s);
         }
         MyWriter writer = new MyWriter();
-        writer.writeToFile(finalOutput);
-    }
+        writer.writeToFile(reversedList);
 
-    private static Set<String> getSetOfIndependentValues(Map<String, List<String>> elements) {
-        Set<String> independentValues = new HashSet<>();
-        elements.values().forEach(independentValues::addAll);
-        independentValues.removeAll(elements.keySet());
-        return independentValues;
     }
 }
