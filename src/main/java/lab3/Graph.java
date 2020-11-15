@@ -3,30 +3,30 @@ package lab3;
 import java.util.*;
 
 public class Graph {
-    private final Map<Vertex, List<Vertex>> verticesThatNeedThisToHaveAbilityToBeAdded;
+    private final Map<Vertex, List<Vertex>> verticesThatNeedThisToHavePossibilityToBeAdded;
     private final Map<Vertex, List<Vertex>> verticesNeededToAddThis;
 
     public Graph() {
-        verticesThatNeedThisToHaveAbilityToBeAdded = new HashMap<>();
+        verticesThatNeedThisToHavePossibilityToBeAdded = new HashMap<>();
         verticesNeededToAddThis = new HashMap<>();
     }
 
     public void addVertex(String name) {
-        verticesThatNeedThisToHaveAbilityToBeAdded.putIfAbsent(new Vertex(name), new ArrayList<>());
+        verticesThatNeedThisToHavePossibilityToBeAdded.putIfAbsent(new Vertex(name), new ArrayList<>());
         verticesNeededToAddThis.putIfAbsent(new Vertex(name), new ArrayList<>());
     }
 
     public void removeVertex(String name) {
         Vertex v = new Vertex(name);
-        verticesThatNeedThisToHaveAbilityToBeAdded.values().forEach(e -> e.remove(v));
-        verticesThatNeedThisToHaveAbilityToBeAdded.remove(new Vertex(name));
+        verticesThatNeedThisToHavePossibilityToBeAdded.values().forEach(e -> e.remove(v));
+        verticesThatNeedThisToHavePossibilityToBeAdded.remove(new Vertex(name));
     }
 
     public void removeEdge(String name1, String name2) {
         Vertex v1 = new Vertex(name1);
         Vertex v2 = new Vertex(name2);
-        List<Vertex> eV1 = verticesThatNeedThisToHaveAbilityToBeAdded.get(v1);
-        List<Vertex> eV2 = verticesThatNeedThisToHaveAbilityToBeAdded.get(v2);
+        List<Vertex> eV1 = verticesThatNeedThisToHavePossibilityToBeAdded.get(v1);
+        List<Vertex> eV2 = verticesThatNeedThisToHavePossibilityToBeAdded.get(v2);
         if (eV1 != null)
             eV1.remove(v2);
         if (eV2 != null)
@@ -36,12 +36,12 @@ public class Graph {
     public void addEdge(String name1, String name2) {
         Vertex v1 = new Vertex(name1);
         Vertex v2 = new Vertex(name2);
-        verticesThatNeedThisToHaveAbilityToBeAdded.get(v1).add(v2);
+        verticesThatNeedThisToHavePossibilityToBeAdded.get(v1).add(v2);
         verticesNeededToAddThis.get(v2).add(v1);
     }
 
     public List<Vertex> getChildVertices(String label) {
-        return verticesThatNeedThisToHaveAbilityToBeAdded.get(new Vertex(label));
+        return verticesThatNeedThisToHavePossibilityToBeAdded.get(new Vertex(label));
     }
 
     public List<Vertex> getParentVertices(String label) {
@@ -75,7 +75,6 @@ public class Graph {
             if (!visited.contains(parentVertex.getName())) {
                 tryToAddParentVertexToQueue(queue, visited, parentVertex);
             }
-
         });
         visited.add(vertex.getName());
         queue.add(vertex.getName());

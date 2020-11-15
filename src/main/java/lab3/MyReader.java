@@ -2,6 +2,7 @@ package lab3;
 
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +39,11 @@ public class MyReader {
         }
         keys.removeAll(values);
 
-        startingVertex = keys.stream().reduce((v, v2) -> v).get();
+        try {
+            startingVertex = keys.stream().reduce((v, v2) -> v).orElseThrow(InputError::new);
+        } catch (InputError inputError) {
+            inputError.printStackTrace();
+        }
 
 
         return newGraph;
