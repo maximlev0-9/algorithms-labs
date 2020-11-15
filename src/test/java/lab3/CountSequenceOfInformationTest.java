@@ -1,5 +1,6 @@
 package lab3;
 
+import lab2.HamsterCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ class CountSequenceOfInformationTest {
     }
 
     @Test
-    void testExample1() {
+    void testExample1(){
         CountSequenceOfInformation counter = new CountSequenceOfInformation();
         counter.execute("src/main/java/lab3/govern.in");
 
@@ -37,19 +38,18 @@ class CountSequenceOfInformationTest {
     }
 
     @Test
-    void testExample2() {
+    void testExample2(){
         CountSequenceOfInformation counter = new CountSequenceOfInformation();
         counter.execute("src/main/java/lab3/govern2.in");
 
         List<String> expected = new ArrayList<>();
-
         expected.add("birthcertificate");
         expected.add("nationalpassport");
         expected.add("militarycertificate");
+        expected.add("foreignpassport");
         expected.add("creditcard");
         expected.add("bankstatement");
         expected.add("hotel");
-        expected.add("foreignpassport");
         expected.add("visa");
         for (String expectedLine : expected) {
             assertEquals(expectedLine, scanner.nextLine());

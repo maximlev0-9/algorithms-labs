@@ -2,9 +2,7 @@ visa foreignpassport
 visa hotel
 visa bankstatement
 bankstatement nationalpassport
-hotel foreignpassport
 hotel creditcard
-restaurant bankstatement
 creditcard nationalpassport
 nationalpassport birthcertificate
 foreignpassport nationalpassport

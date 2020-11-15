@@ -2,50 +2,41 @@ package lab3;
 
 
 import lombok.Getter;
-import lombok.SneakyThrows;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 public class MyReader {
-    private String startingVertex;
 
-    public Graph readFrom(String pathToFile) {
-        Graph newGraph = new Graph();
+    public Map<String, List<String>> readFrom(String pathToFile) {
+        Map<String, List<String>> elements = new HashMap<>();
 
-        Set<String> keys = new HashSet<>();
-        Set<String> values = new HashSet<>();
         try (Scanner scanner = new Scanner(new File(pathToFile))) {
-            while (scanner.hasNextLine()) {
-                String input = scanner.nextLine();
+            while (true) {
+                String input = null;
+                try {
+                    input = scanner.nextLine();
+
+                } catch (NoSuchElementException ignored) {
+                }
+                if (input == null) break;
+
                 String[] pairs = input.split(" ");
 
                 String key = pairs[0].trim();
                 String value = pairs[1].trim();
 
-                keys.add(key);
-                values.add(value);
+                List<String> listOfValues = elements.getOrDefault(key, new ArrayList<>());
+                listOfValues.add(value);
+                elements.put(key, listOfValues);
 
-                newGraph.addVertex(key);
-                newGraph.addVertex(value);
-                newGraph.addEdge(key, value);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        keys.removeAll(values);
 
-        try {
-            startingVertex = keys.stream().reduce((v, v2) -> v).orElseThrow(InputError::new);
-        } catch (InputError inputError) {
-            inputError.printStackTrace();
-        }
-
-
-        return newGraph;
+        return elements;
     }
 }
