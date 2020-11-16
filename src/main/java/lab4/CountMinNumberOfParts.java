@@ -31,6 +31,8 @@ public class CountMinNumberOfParts {
 
     public void evaluate(String pathToFile) {
 
+
+
         // new algorithm
         //
         // for each element
