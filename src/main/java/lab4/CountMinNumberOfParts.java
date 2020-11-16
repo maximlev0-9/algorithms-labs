@@ -2,8 +2,10 @@ package lab4;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CountMinNumberOfParts {
     private List<String> listOfPossibleSubstrings;
@@ -28,13 +30,35 @@ public class CountMinNumberOfParts {
 //    }
 
     public void evaluate(String pathToFile) {
+
+        // new algorithm
+        //
+        // for each element
+        // check if I can get here with any value from list of possible strings. (additional check of length from start to current index, whether...
+        // ...it's too small or not)
+        // if I can, check whether there is value with any number of paths to get there
+        // if there is, add to current element's paths that element paths. Continue checking with other elements from list of...)
+        // ok, when I get to the end, last element in array would show how many ways to it exists.
+
+
+
+
         MyReader reader = new MyReader();
         String[] values = reader.readFrom(pathToFile);
         String binaryNumber = values[0];
         int number = Integer.parseInt(values[1]);
-
+        int[] pathsToThisElements = new int[binaryNumber.length()];
+        Arrays.fill(pathsToThisElements, 0);
         listOfPossibleSubstrings = generateSubstringsFromNumber(number, binaryNumber.length());
-        Collections.reverse(listOfPossibleSubstrings);
+//        Collections.reverse(listOfPossibleSubstrings);
+
+
+
+        for (int i = 0; i < binaryNumber.length(); i++) {
+
+        }
+
+
 
         checkAllPossibleVariationsForThis(binaryNumber, 0);
 
