@@ -1,35 +1,19 @@
 package lab4;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+<<<<<<< HEAD
 import java.util.Collections;
+=======
+>>>>>>> 47290a5... wrote new algorithm
 import java.util.List;
 import java.util.stream.Stream;
 
 public class CountMinNumberOfParts {
     private List<String> listOfPossibleSubstrings;
-    private int minNumberOfIterations = Integer.MAX_VALUE;
-
-//    public static void main(String[] args) {
-//        String binaryReal = "100111011110100100111110110011100101000111100101110010001100111011110100100111110110011100101000110010110000111100101110010001";
-//        String binary = "1001110111101001001111101100111001010001111001011100100011001110111101001001111101100111001010001100";
-//        int len = binary.length();
-//        System.out.println(len);
-//        BigInteger decimal = BigInteger.ZERO;
-//        BigInteger multiplier = BigInteger.ONE;
-//        for (int pow = (binary.length() - 1); pow > -1; pow--) {
-//
-//            if (binary.charAt(pow) == '1') {
-//                decimal = decimal.add(BigInteger.valueOf(1L << (pow)));
-//
-//            }
-//        }
-//        System.out.println(decimal.toString());
-//        System.out.println(decimal.toString().length());
-//    }
 
     public void evaluate(String pathToFile) {
+<<<<<<< HEAD
 
 
 
@@ -45,6 +29,22 @@ public class CountMinNumberOfParts {
 
 
 
+=======
+        // binary_str
+        // number
+        // list_of_lengths_to_each_element = [Integer.MAX_VALUE for i in range(len(binary_str))]
+        // генеримо ліст кусків
+        // цикл
+        //  for i in range(n):
+        //      for substr in list:
+        //          чЕкаємо, чи індекс початку стрінги з ліста не менший 0
+        //          if i - len(substr) < 0:
+        //              break
+        //
+        //          if binary_str[i-len(substr), i] is substr:
+        //              list_of_lengths_to_each_element[i] = min(this, list_of_lengths_to_each_element[i-len(substr)])
+        //
+>>>>>>> 47290a5... wrote new algorithm
         MyReader reader = new MyReader();
         String[] values = reader.readFrom(pathToFile);
         String binaryNumber = values[0];
@@ -52,6 +52,7 @@ public class CountMinNumberOfParts {
         int[] pathsToThisElements = new int[binaryNumber.length()];
         Arrays.fill(pathsToThisElements, 0);
         listOfPossibleSubstrings = generateSubstringsFromNumber(number, binaryNumber.length());
+<<<<<<< HEAD
 //        Collections.reverse(listOfPossibleSubstrings);
 
 
@@ -61,26 +62,38 @@ public class CountMinNumberOfParts {
         }
 
 
+=======
+>>>>>>> 47290a5... wrote new algorithm
 
-        checkAllPossibleVariationsForThis(binaryNumber, 0);
+        int result = doAllEvaluations(binaryNumber);
 
         MyWriter writer = new MyWriter();
-        writer.writeToFile(minNumberOfIterations);
+        writer.writeToFile(result);
     }
 
-    private void checkAllPossibleVariationsForThis(String binaryNumber, int currentNumberOfIterations) {
-        if (binaryNumber.isEmpty()) {
-            minNumberOfIterations = Math.min(currentNumberOfIterations, minNumberOfIterations);
-            return;
-        }
-        if (currentNumberOfIterations >= minNumberOfIterations - 1) {
-            return;
-        }
-        for (String prefix : listOfPossibleSubstrings) {
-            if (binaryNumber.startsWith(prefix)) {
-                checkAllPossibleVariationsForThis(binaryNumber.substring(prefix.length()), ++currentNumberOfIterations);
+    private int doAllEvaluations(String binaryNumber) {
+        int length = binaryNumber.length()+1;
+        Integer[] lol = new Integer[length];
+        Arrays.fill(lol, Integer.MAX_VALUE);
+        lol[0] = 0;
+        List<Integer> listOfLengthsToEachElement = Arrays.asList(lol);
+        for (int i = 0; i < length; i++) {
+            for (String substring : listOfPossibleSubstrings) {
+                int lengthOfSubstring = substring.length();
+                if (i - lengthOfSubstring < 0) {
+                    break;
+                }
+                if (listOfLengthsToEachElement.get(i - lengthOfSubstring) == Integer.MAX_VALUE){
+                    continue;
+                }
+                if (binaryNumber.startsWith(substring, i - lengthOfSubstring)) {
+                    listOfLengthsToEachElement.set(i,
+                            Integer.min(listOfLengthsToEachElement.get(i),
+                                    listOfLengthsToEachElement.get(i - lengthOfSubstring) + 1));
+                }
             }
         }
+        return listOfLengthsToEachElement.get(length-1);
     }
 
     private List<String> generateSubstringsFromNumber(int number, int length) {
