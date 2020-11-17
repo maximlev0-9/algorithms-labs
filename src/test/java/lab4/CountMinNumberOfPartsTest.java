@@ -34,11 +34,15 @@ class CountMinNumberOfPartsTest {
     void testExample3() {
         testTemplate("src/main/java/lab4/test_files/fantz3.in", "3");
     }
+    @Test
+    void testExample4() {
+        testTemplate("src/main/java/lab4/test_files/fantz4.in", "7");
+    }
 
-    private void testTemplate(String s, String s2) {
+    private void testTemplate(String pathToFile, String expected) {
         CountMinNumberOfParts count = new CountMinNumberOfParts();
-        count.evaluate(s);
-        assertEquals(s2, scanner.nextLine());
+        count.evaluate(pathToFile);
+        assertEquals(expected, scanner.nextLine());
     }
 
 }

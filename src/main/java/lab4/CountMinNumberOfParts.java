@@ -44,18 +44,21 @@ public class CountMinNumberOfParts {
         lol[0] = 0;
         List<Integer> listOfLengthsToEachElement = Arrays.asList(lol);
         for (int i = 0; i < length; i++) {
+
             for (String substring : listOfPossibleSubstrings) {
                 int lengthOfSubstring = substring.length();
+
                 if (i - lengthOfSubstring < 0) {
                     break;
                 }
+
                 if (listOfLengthsToEachElement.get(i - lengthOfSubstring) == Integer.MAX_VALUE) {
                     continue;
                 }
+
                 if (binaryNumber.startsWith(substring, i - lengthOfSubstring)) {
                     listOfLengthsToEachElement.set(i,
-                            Integer.min(listOfLengthsToEachElement.get(i),
-                                    listOfLengthsToEachElement.get(i - lengthOfSubstring) + 1));
+                            Integer.min(listOfLengthsToEachElement.get(i), listOfLengthsToEachElement.get(i - lengthOfSubstring) + 1));
                 }
             }
         }
